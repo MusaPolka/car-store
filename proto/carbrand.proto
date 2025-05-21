@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package carbrand;
+
+option go_package = "ecommerce/car-service/internal/pb;pb";
+
+// Example service and message
+service CarBrandService {
+  rpc GetCarBrand (GetCarBrandRequest) returns (CarBrand);
+  rpc ListCarBrands (ListCarBrandsRequest) returns (ListCarBrandsResponse);
+  rpc CreateCarBrand (CreateCarBrandRequest) returns (CarBrand);
+  rpc UpdateCarBrand (UpdateCarBrandRequest) returns (CarBrand);
+  rpc DeleteCarBrand (DeleteCarBrandRequest) returns (DeleteCarBrandResponse);
+}
+
+message CarBrand {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+message ListCarBrandsRequest {}
+
+message ListCarBrandsResponse {
+  repeated CarBrand carbrands = 1;
+}
+
+message GetCarBrandRequest { string id = 1; }
+message CreateCarBrandRequest { string name = 1; string description = 2; }
+message UpdateCarBrandRequest { string id = 1; string name = 2; string description = 3; }
+message DeleteCarBrandRequest { string id = 1; }
+message DeleteCarBrandResponse { bool success = 1; }

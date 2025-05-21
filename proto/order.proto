@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package order;
+
+option go_package = "ecommerce/order-service/internal/pb;pb";
+
+service OrderService {
+  rpc ListOrders (ListOrdersRequest) returns (ListOrdersResponse);
+}
+
+message Order {
+  string id = 1;
+  string user_id = 2;
+  double total_price = 3;
+  string status = 4;
+  repeated OrderItem items = 5;
+}
+
+message OrderItem {
+  string id = 1;
+  string order_id = 2;
+  string car_id = 3;
+  int32 quantity = 4;
+  double unit_price = 5;
+  double subtotal = 6;
+}
+
+message ListOrdersRequest {}
+
+message ListOrdersResponse {
+  repeated Order orders = 1;
+}

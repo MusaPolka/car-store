@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package car;
+
+option go_package = "ecommerce/car-service/internal/pb;pb";
+
+service CarService {
+  rpc ListCars(ListCarsRequest) returns (ListCarsResponse);
+  rpc GetCar(GetCarRequest) returns (Car);
+  rpc CreateCar(CreateCarRequest) returns (Car);
+  rpc DeleteCar(DeleteCarRequest) returns (DeleteCarResponse);
+}
+
+message Car {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  string brand_id = 4;
+  double price = 5;
+  int32 stock = 6;
+  int32 year = 7;
+  string color = 8;
+}
+
+message ListCarsRequest {}
+message ListCarsResponse { repeated Car cars = 1; }
+
+message GetCarRequest { string id = 1; }
+message CreateCarRequest {
+  string name = 1;
+  string description = 2;
+  string brand_id = 3;
+  double price = 4;
+  int32 stock = 5;
+  int32 year = 6;
+  string color = 7;
+}
+message DeleteCarRequest { string id = 1; }
+message DeleteCarResponse { bool success = 1; }
