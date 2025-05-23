@@ -9,6 +9,7 @@ service CarService {
   rpc GetCar(GetCarRequest) returns (Car);
   rpc CreateCar(CreateCarRequest) returns (Car);
   rpc DeleteCar(DeleteCarRequest) returns (DeleteCarResponse);
+  rpc ListCarsByBrand(ListCarsByBrandRequest) returns (ListCarsResponse);
 }
 
 message Car {
@@ -37,3 +38,7 @@ message CreateCarRequest {
 }
 message DeleteCarRequest { string id = 1; }
 message DeleteCarResponse { bool success = 1; }
+
+message ListCarsByBrandRequest {
+  string brand_id = 1;
+}

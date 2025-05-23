@@ -20,10 +20,8 @@ func main() {
 		log.Fatal("Database connection failed: ", err)
 	}
 
-	// Setup Redis client
 	cache := redisinfra.NewRedisClient("localhost:6379", "", 0)
 
-	// Repo & usecase for CarBrand
 	carBrandRepo := repo.NewCarBrandRepo(db)
 	carBrandUsecase := usecase.NewCarBrandUsecase(carBrandRepo, cache) // <-- inject cache
 
@@ -34,6 +32,10 @@ func main() {
 	grpcServer := grpc.NewServer()
 	pb.RegisterCarBrandServiceServer(grpcServer, grpcHandler.NewCarBrandServer(carBrandUsecase))
 	reflection.Register(grpcServer)
+
+	carRepo := repo.NewCarRepo(db)
+	carUsecase := usecase.NewCarUsecase(carRepo)
+	pb.RegisterCarServiceServer(grpcServer, grpcHandler.NewCarServer(carUsecase))
 
 	log.Println("gRPC server running at :50051")
 	if err := grpcServer.Serve(lis); err != nil {

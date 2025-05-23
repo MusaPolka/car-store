@@ -71,9 +71,9 @@ func (u *carBrandUsecase) Delete(id string) error {
 	return u.repo.Delete(id)
 }
 func (u *carBrandUsecase) List() ([]domain.CarBrand, error) {
-	natsConn := messaging.NewNATSConnection()
-	defer natsConn.Close()
-	go listenForCarBrandCreated(natsConn)
+	//natsConn := messaging.NewNATSConnection()
+	//defer natsConn.Close()
+	//go listenForCarBrandCreated(natsConn)
 	return u.repo.List()
 }
 

@@ -15,7 +15,6 @@ func NewOrderServer(uc usecase.OrderUsecase) *OrderServer {
 	return &OrderServer{uc: uc}
 }
 
-// Example: ListOrders implementation
 func (s *OrderServer) ListOrders(ctx context.Context, req *pb.ListOrdersRequest) (*pb.ListOrdersResponse, error) {
 	orders, err := s.uc.List()
 	if err != nil {
